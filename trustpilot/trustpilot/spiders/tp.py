@@ -1,5 +1,5 @@
 import scrapy
-
+from trustpilot.items import TrustItem
 
 class TpSpider(scrapy.Spider):
     name = "tp"
@@ -35,12 +35,14 @@ class TpSpider(scrapy.Spider):
         reviews = response.css("section.styles_reviewContentwrapper__zH_9M")
 
         for review in reviews:
-            yield {
-                "stars" : review.css("div.styles_reviewHeader__iU9Px").attrib["data-service-review-rating"],
+            trustitem = TrustItem()
 
-                "review_date" : review.css("time").attrib["datetime"],
-                
-                "description" : review.css("p.typography_body-l__KUYFJ::text").get(),
+            trustitem["stars"] = review.css("div.styles_reviewHeader__iU9Px").attrib["data-service-review-rating"]
 
-                "date_experience" :  review.css("p.typography_body-m__xgxZ_ ::text")[3].get(),
-            }
+            trustitem["review_date"] = review.css("time").attrib["datetime"]
+            
+            trustitem["description"] = review.css("p.typography_body-l__KUYFJ::text").get()
+
+            trustitem["date_experience"] =  review.css("p.typography_body-m__xgxZ_ ::text")[3].get()
+
+            yield trustitem

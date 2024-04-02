@@ -12,7 +12,7 @@ BOT_NAME = "trustpilot"
 SPIDER_MODULES = ["trustpilot.spiders"]
 NEWSPIDER_MODULE = "trustpilot.spiders"
 
-API_KEY = ""
+API_KEY = "11898a79-c47e-4074-b6c2-c2fd4e351c04"
 API_ENDPOINT = "https://headers.scrapeops.io/v1/browser-headers"
 NUM_RESULTS = 129
 FAKE_HEADERS_ENABLED = True
@@ -67,9 +67,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "trustpilot.pipelines.TrustpilotPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "trustpilot.pipelines.TrustpilotPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
